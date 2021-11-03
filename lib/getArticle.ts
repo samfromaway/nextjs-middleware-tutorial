@@ -1,10 +1,12 @@
 // https://fakestoreapi.com/docs
 
+import { Category } from '../types';
+
 function timeout(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export default async function getArticle(category?: string) {
+export default async function getArticle(category?: Category) {
   const showSpecific = category && category !== 'not-defined';
 
   const url = showSpecific

@@ -2,7 +2,7 @@ import React from 'react';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import getArticle from '../lib/getArticle';
 import ProductCard from '../components/ProductCard';
-import { Product } from '../types';
+import { Category, Product } from '../types';
 import styles from '../styles/Home.module.css';
 import { COOKIE_NAME } from '../constants';
 import { removeQuotes } from '../utils/removeQuotes';
@@ -29,7 +29,7 @@ const SSR = ({
 export async function getServerSideProps({ req }: GetServerSidePropsContext) {
   const cookie = removeQuotes(req.cookies?.[COOKIE_NAME]);
 
-  const data: Product[] = await getArticle(cookie);
+  const data: Product[] = await getArticle(cookie as Category);
 
   return {
     props: {

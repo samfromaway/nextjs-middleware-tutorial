@@ -1,7 +1,7 @@
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import ProductCard from '../../components/ProductCard';
 import getArticle from '../../lib/getArticle';
-import { Product } from '../../types';
+import { Category, Product } from '../../types';
 import styles from '../../styles/Home.module.css';
 
 export default function SG({
@@ -26,7 +26,7 @@ export default function SG({
 export async function getStaticProps({
   params,
 }: GetStaticPropsContext<{ id: string }>) {
-  const data: Product[] = await getArticle(params?.id);
+  const data: Product[] = await getArticle(params?.id as Category);
 
   return {
     props: {
@@ -35,9 +35,16 @@ export async function getStaticProps({
   };
 }
 
+type Paths = { params: { id: Category } }[];
+
 export async function getStaticPaths() {
+  const paths: Paths = [
+    { params: { id: 'electronics' } },
+    { params: { id: 'jewelery' } },
+    { params: { id: 'not-defined' } },
+  ];
   return {
-    paths: [],
+    paths,
     fallback: 'blocking',
   };
 }
