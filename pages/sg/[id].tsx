@@ -10,7 +10,7 @@ export default function SG({
   return (
     <div className={styles.container}>
       <h1>Static Page</h1>
-      {data.map((product: any) => (
+      {data.map((product) => (
         <ProductCard
           key={product.id}
           title={product.title}
